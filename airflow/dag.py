@@ -2,9 +2,12 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 import pandas as pd
-import logging
+from airflow.utils.log.logging_mixin import LoggingMixin
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
+
+# Initialize the logger
+log = LoggingMixin().log
 
 # Define default arguments
 default_args = {
@@ -27,40 +30,39 @@ with DAG(
         try:
             df = pd.read_csv(source_data, parse_dates=['timestamp'])
         except FileNotFoundError as e:
-            logging.error(f"File not found at: {source_data}")
+            log.error(f"File not found at: {source_data}")
         except pd.errors.ParserError as e:
-            logging.error("File could be parsed. Please check CSV is correctly formatted.")
+            log.error("File could be parsed. Please check CSV is correctly formatted.")
         except Exception as e:
-            logging.error(f"Unexpected error: {e}")
+            log.error(f"Unexpected error: {e}")
 
     def data_cleaning():
         source_data = '/home/sagar/Desktop/iCustData/data.csv'
         df = pd.read_csv(source_data, parse_dates=['timestamp'])
-        df.fillna(value='Missing')
-        df.to_csv('/home/sagar/Desktop/iCustData/data_cleaned.csv', index=False)
+        df_cleaned = df.fillna(value='Missing')
+        df_cleaned.to_csv('/home/sagar/Desktop/iCustData/data_cleaned.csv', index=False)
 
     def data_transformation():
         cleaned_data = '/home/sagar/Desktop/iCustData/data_cleaned.csv'
-        df = pd.read_csv(cleaned_data)
+        df_transformed = pd.read_csv(cleaned_data)
 
-        df.to_csv('/home/sagar/Desktop/iCustData/data_transformed.csv', index=False)
+        df_transformed.to_csv('/home/sagar/Desktop/iCustData/data_transformed.csv', index=False)
 
     def data_loading():
         transformed_data = '/home/sagar/Desktop/iCustData/data_transformed.csv'
-        df = pd.read_csv(transformed_data)
+        df_load = pd.read_csv(transformed_data)
 
-        pgdb_url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
+        url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
         pgdb_tablename = 'user_interaction_data'
 
         # Create Connection Engine
-        db_engine = create_engine(pgdb_url)
+        engine = create_engine(url)
 
         try:
-            df.to_sql(pgdb_tablename, db_engine, if_exists='append', index=False)
+            df_load.to_sql(pgdb_tablename, engine, if_exists='append', index=False)
         except SQLAlchemyError as e:
-            logging.error(f"The connection to database while loading data failed with error : {e}")
-        except Exception as e:
-            logging.error(f"Unexpected error : {e}")
+            log.error(f"The connection to database while loading data failed with error : {e}")
+            log.error(f"Unexpected error : {e}")
 
     # Define tasks
     read_source_file = PythonOperator(
@@ -85,4 +87,3 @@ with DAG(
 
     #Set task dependencies
     read_source_file >> clean_data >> transform_data >> load_data
-

@@ -4,15 +4,16 @@ from io import StringIO
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 
+
 # Configure logging
 logging.basicConfig(filename='/tmp/user_interaction.log', level=logging.ERROR)
 
 # Postgres DB Connection String
-pgdb_url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
+url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
 pgdb_tablename = 'user_interaction_data'
 
 #Create Connection Engine
-db_engine = create_engine(pgdb_url)
+engine = create_engine(url)
 
 
 #Data Extraction
@@ -30,7 +31,9 @@ print(df)
 
 #Data Cleaning
 #Handling missing value with defualt value
-#df_filled = df.fillna(value='Missing')
+df_filled = df.fillna(value='Missing')
+
+print(df_filled)
 
 #Handling missing value by removing the row
 #df_cleaned = df.dropna()
@@ -43,13 +46,13 @@ print(df)
 
 #Data Loading
 try:
-    df.to_sql(pgdb_tablename, db_engine, if_exists='append', index=False)
+    df.to_sql(pgdb_tablename, engine, if_exists='append', index=False)
 except SQLAlchemyError as e:
     logging.error(f"The connection to database while loading data failed with error : {e}")
 except Exception as e:
     logging.error(f"Unexpected error : {e}")
 
-#print("Data loaded successfully.")
+print("Data loaded successfully.")
 
 
 
