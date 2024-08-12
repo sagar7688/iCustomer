@@ -20,7 +20,7 @@ Database used in this use case is Postgres. The data loaded sql file is 'pg_data
 
 Setuo airflow standalone using instructions here : https://airflow.apache.org/docs/apache-airflow/stable/start.html
 
-The dag file 'af?_user_interaction.py' with dag name 'user_insteraction_data_fag' consists of 4 tasks :
+The dag file 'af_user_interaction.py' with dag name 'user_insteraction_data_fag' consists of 4 tasks :
 1. Data_Extraction
 2. Data_Cleaning
 3. Data_Transformation
