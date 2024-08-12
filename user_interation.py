@@ -1,40 +1,55 @@
-import requests
 import pandas as pd
+import logging
 from io import StringIO
 from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 
-# Database connection parameters
-db_url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
+# Configure logging
+logging.basicConfig(filename='/tmp/user_interaction.log', level=logging.ERROR)
 
-# Create an SQLAlchemy engine
-engine = create_engine(db_url)
+# Postgres DB Connection String
+pgdb_url = 'postgresql+psycopg2://sagar:sagar1212@localhost:5432/iCustomer'
+pgdb_tablename = 'user_interaction_data'
 
-# URL of the remote CSV file
-raw_url = 'https://raw.githubusercontent.com/sagar7688/iCustomer/88f71ccc32f4a06a405f7abccccd9fe644658bf0/sourcefile/data.csv'
+#Create Connection Engine
+db_engine = create_engine(pgdb_url)
 
-# Fetch the CSV file using requests
-response = requests.get(raw_url)
-print(response)
 
-# Check if the request was successful
-if response.status_code == 200:
-    # Read the content and load it into a pandas DataFrame
-    csv_data = StringIO(response.text)
-    df = pd.read_csv(csv_data)
+#Data Extraction
+source_data = '/home/sagar/Desktop/iCustData/data.csv'
+try:
+    df = pd.read_csv(source_data, parse_dates=['timestamp'])
+except FileNotFoundError as e:
+    logging.error(f"File not found at: {source_data}")
+except pd.errors.ParserError as e:
+    logging.error("File could be parsed. Please check CSV is correctly formatted.")
+except Exception as e:
+    logging.error(f"Unexpected error: {e}")
 
-    # Display the first few rows of the DataFrame
-    print(df.head())
-else:
-    print(f"Failed to fetch the CSV file. Status code: {response.status_code}")
+print(df)
 
-# Define the table name
-table_name = 'user_interaction_data'
+#Data Cleaning
+#Handling missing value with defualt value
+#df_filled = df.fillna(value='Missing')
 
-# Load data into PostgreSQL using the to_sql method
-df.to_sql(table_name, engine, if_exists='append', index=False)
-df.to_sql(table_name, engine, if_exists='append', index=False)
+#Handling missing value by removing the row
+#df_cleaned = df.dropna()
 
-print("Data loaded successfully.")
+
+#Data Transformation
+
+
+
+
+#Data Loading
+try:
+    df.to_sql(pgdb_tablename, db_engine, if_exists='append', index=False)
+except SQLAlchemyError as e:
+    logging.error(f"The connection to database while loading data failed with error : {e}")
+except Exception as e:
+    logging.error(f"Unexpected error : {e}")
+
+#print("Data loaded successfully.")
 
 
 
