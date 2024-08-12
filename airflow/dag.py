@@ -13,7 +13,7 @@ default_args = {
 
 # Define the DAG
 with DAG(
-    'user_interaction_dag',
+    'user_interaction_data_dag',
     default_args=default_args,
     description='Ingest user interaction data in Postgres',
     schedule_interval='@daily',
