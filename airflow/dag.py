@@ -83,6 +83,6 @@ with DAG(
         python_callable=data_loading,
     )
 
-    # Set task dependencies
+    #Set task dependencies
     read_source_file >> clean_data >> transform_data >> load_data
 
