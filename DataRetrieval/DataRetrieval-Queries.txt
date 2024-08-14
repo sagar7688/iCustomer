@@ -1,0 +1,23 @@
+Total number of interactions per day :
+
+SELECT "timestamp" :: date ,count(interaction_id)
+FROM public.user_interaction_data
+group by "timestamp"  :: date
+
+
+ Top 5 users by the number of interactions:
+
+SELECT user_id,count(interaction_id) total_intercations
+FROM public.user_interaction_data
+group by user_id
+order by total_intercations desc
+fetch first 5 rows with ties
+
+
+Most interacted products based on the number of interactions:
+
+SELECT product_id ,count(interaction_id) total_intercations
+FROM public.user_interaction_data
+group by product_id 
+order by total_intercations desc
+fetch first 5 rows with ties;
