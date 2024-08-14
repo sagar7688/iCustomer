@@ -29,4 +29,9 @@ The dag file 'af_user_interaction.py' with dag name 'user_insteraction_data_dag'
 
 ## Data Storage and Retrieval
 
+Queries for Data Retrieval tasks mentioned below are added in folder DataRetrieval:
+1. Total number of interactions per day
+2. Top 5 users by the number of interactions
+3. Most interacted products based on the number of interactions
+
 
