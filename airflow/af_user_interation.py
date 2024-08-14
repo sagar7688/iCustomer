@@ -44,8 +44,9 @@ with DAG(
 
     def data_transformation():
         cleaned_data = '/home/sagar/Desktop/iCustData/data_cleaned.csv'
-        df_transformed = pd.read_csv(cleaned_data)
-
+        df_cleaned = pd.read_csv(cleaned_data)
+        df_groupby = df_cleaned.groupby(['user_id', 'product_id']).size().reset_index(name='interaction_count')
+        df_transformed = pd.merge(df_cleaned, df_groupby, on=['user_id', 'product_id'])
         df_transformed.to_csv('/home/sagar/Desktop/iCustData/data_transformed.csv', index=False)
 
     def data_loading():

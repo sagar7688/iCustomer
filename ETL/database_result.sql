@@ -1,0 +1,66 @@
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I01',1,'PRD1','action1','2024-08-01 07:07:00',4),
+	 ('I09',1,'PRD1','action1','2024-08-01 07:07:00',4),
+	 ('I15',1,'PRD1','action1','2024-08-05 00:00:00',4),
+	 ('I30',1,'PRD1','action1','2024-08-14 00:00:00',4),
+	 ('I02',2,'PRD2','action1','2024-08-01 07:07:00',1),
+	 ('I03',3,'PRD2','action2','2024-08-01 07:07:00',1),
+	 ('I04',3,'PRD3','Missing','2024-08-01 07:07:00',1),
+	 ('I05',3,'PRD4','action3','2024-08-01 07:07:00',1),
+	 ('I06',2,'PRD1','action2','2024-08-01 07:07:00',1),
+	 ('I07',4,'PRD4','action2','2024-08-01 07:07:00',2);
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I10',4,'PRD4','action2','2024-08-01 07:07:00',2),
+	 ('I08',1,'PRD2','action3','2024-08-01 07:07:00',2),
+	 ('I24',1,'PRD2','action1','2024-08-09 00:00:00',2),
+	 ('I11',5,'PRD2','Missing','2024-08-05 00:00:00',1),
+	 ('I12',5,'PRD4','action1','2024-08-05 00:00:00',1),
+	 ('I13',6,'PRD1','action2','2024-08-05 00:00:00',3),
+	 ('I22',6,'PRD1','action2','2024-08-14 00:00:00',3),
+	 ('I27',6,'PRD1','action2','2024-08-14 00:00:00',3),
+	 ('I14',2,'PRD3','action2','2024-08-05 00:00:00',3),
+	 ('I18',2,'PRD3','action1','2024-08-08 00:00:00',3);
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I28',2,'PRD3','action3','2024-08-14 00:00:00',3),
+	 ('I16',1,'PRD3','action3','2024-08-06 00:00:00',1),
+	 ('I17',6,'PRD4','action3','2024-08-07 00:00:00',1),
+	 ('I19',4,'PRD1','action2','2024-08-09 00:00:00',2),
+	 ('I20',4,'PRD1','action3','2024-08-12 00:00:00',2),
+	 ('I21',3,'PRD1','action1','2024-08-12 00:00:00',1),
+	 ('I23',5,'PRD3','action3','2024-08-09 00:00:00',1),
+	 ('I25',6,'PRD3','action2','2024-08-09 00:00:00',1),
+	 ('I26',6,'PRD2','action2','2024-08-09 00:00:00',2),
+	 ('I29',6,'PRD2','action1','2024-08-14 00:00:00',2);
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I01',1,'PRD1','action1','2024-08-01 07:07:00',4),
+	 ('I09',1,'PRD1','action1','2024-08-01 07:07:00',4),
+	 ('I15',1,'PRD1','action1','2024-08-05 00:00:00',4),
+	 ('I30',1,'PRD1','action1','2024-08-14 00:00:00',4),
+	 ('I02',2,'PRD2','action1','2024-08-01 07:07:00',1),
+	 ('I03',3,'PRD2','action2','2024-08-01 07:07:00',1),
+	 ('I04',3,'PRD3','Missing','2024-08-01 07:07:00',1),
+	 ('I05',3,'PRD4','action3','2024-08-01 07:07:00',1),
+	 ('I06',2,'PRD1','action2','2024-08-01 07:07:00',1),
+	 ('I07',4,'PRD4','action2','2024-08-01 07:07:00',2);
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I10',4,'PRD4','action2','2024-08-01 07:07:00',2),
+	 ('I08',1,'PRD2','action3','2024-08-01 07:07:00',2),
+	 ('I24',1,'PRD2','action1','2024-08-09 00:00:00',2),
+	 ('I11',5,'PRD2','Missing','2024-08-05 00:00:00',1),
+	 ('I12',5,'PRD4','action1','2024-08-05 00:00:00',1),
+	 ('I13',6,'PRD1','action2','2024-08-05 00:00:00',3),
+	 ('I22',6,'PRD1','action2','2024-08-14 00:00:00',3),
+	 ('I27',6,'PRD1','action2','2024-08-14 00:00:00',3),
+	 ('I14',2,'PRD3','action2','2024-08-05 00:00:00',3),
+	 ('I18',2,'PRD3','action1','2024-08-08 00:00:00',3);
+INSERT INTO public.user_interaction_data (interaction_id,user_id,product_id,"action","timestamp",interaction_count) VALUES
+	 ('I28',2,'PRD3','action3','2024-08-14 00:00:00',3),
+	 ('I16',1,'PRD3','action3','2024-08-06 00:00:00',1),
+	 ('I17',6,'PRD4','action3','2024-08-07 00:00:00',1),
+	 ('I19',4,'PRD1','action2','2024-08-09 00:00:00',2),
+	 ('I20',4,'PRD1','action3','2024-08-12 00:00:00',2),
+	 ('I21',3,'PRD1','action1','2024-08-12 00:00:00',1),
+	 ('I23',5,'PRD3','action3','2024-08-09 00:00:00',1),
+	 ('I25',6,'PRD3','action2','2024-08-09 00:00:00',1),
+	 ('I26',6,'PRD2','action2','2024-08-09 00:00:00',2),
+	 ('I29',6,'PRD2','action1','2024-08-14 00:00:00',2);
